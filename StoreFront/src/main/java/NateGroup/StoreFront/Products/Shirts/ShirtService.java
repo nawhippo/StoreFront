@@ -26,17 +26,17 @@ public class ShirtService {
             shirtRepository.deleteById(id);
         }
 
-    public Shirt updateShirt(Long id, Shirt shirtDetails) {
-        Optional<Shirt> optionalShirt = shirtRepository.findById(id);
-        if (optionalShirt.isPresent()) {
+        public Shirt updateShirt(Long id, Shirt shirtDetails) {
+            Optional<Shirt> optionalShirt = shirtRepository.findById(id);
+            if (optionalShirt.isPresent()) {
             Shirt shirt = optionalShirt.get();
             shirt.setColor(shirtDetails.getColor());
             shirt.setSize(shirtDetails.getSize());
             return shirtRepository.save(shirt);
-        } else {
+            } else {
             throw new RuntimeException("Shirt not found with id " + id);
+            }
         }
-    }
 
 
     }
