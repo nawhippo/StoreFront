@@ -28,11 +28,11 @@ public class JwtUtil {
 
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims.getSubject());
+        return extractClaim(token, Claims -> Claims.getSubject());
     }
 
     public Date extractExpiration(String token) {
-        return extractClaim(token, Claims.getExpiration());
+        return extractClaim(token, Claims -> Claims.getExpiration());
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
