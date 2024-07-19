@@ -1,11 +1,14 @@
-import react, {useState} from "react";
+import react, {useEffect, useState} from "react";
 
 const productPage = () => {
     const [products, setProducts] = useState([]);
     const [message, setMessage] = useState('');
     const [searchFilter, setSearchFilter] = useState('');
     let stream; 
-    
+    useEffect = (() => {
+        getAllProducts();
+    })
+
 const handleSearchbarChange = () => {
     setSearchFilter()
 }
@@ -36,10 +39,10 @@ const searchTermMatches = (term, productName) => {
     
     return (
         <div>
-            <input type="text"> </input>
             <div>
+                <input type="text" onChange={handleSearchbarChange}></input>
                 products ? {products.filter(searchTermMatches).map((product,index) => (
-                    <div className="col-md-4" key={index}>
+                    <div key={index}>
                         <ProductCard product={product} />
                     </div>
                 ))} 
