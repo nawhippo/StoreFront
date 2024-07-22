@@ -16,6 +16,9 @@ const ProductCard = ( {Product} ) => {
             <div className="card-title">
             {product.name}
             </div>
+            <div className="card-body">
+              {product.description}
+            </div>
             <p className="card-text">
             {product.price}
             </p>
