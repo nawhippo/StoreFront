@@ -13,8 +13,8 @@ const handleSearchbarChange = () => {
     setSearchFilter()
 }
 
-const searchTermMatches = (term, productName) => {
-    if ((term == "") || (productName.contains(term))) {
+const searchTermMatches = (term, product) => {
+    if ((term == "") || (product.name.contains(term))) {
         return true;
     } 
     return false;
@@ -26,27 +26,29 @@ const searchTermMatches = (term, productName) => {
         method: 'GET'
         })
         .then(response => {
-            response.json();
-            setProducts(response.products)
+            setProducts(response)
 
         })
         .catch(error => 
             setMessage("Something went wrong while trying to get products :(")
         )
     }
-    
+   
+    const filteredProducts = products.filter(product=> searchTermMatches(searchFilter, product));
 
     
     return (
         <div>
             <div>
                 <input type="text" onChange={handleSearchbarChange}></input>
-                products ? {products.filter(searchTermMatches).map((product,index) => (
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map((product, index) => (
                     <div key={index}>
                         <ProductCard product={product} />
                     </div>
-                ))} 
-                <p>no products found</p>   
+                ))
+            ) : ( <p>no products found</p>  
+            )} 
             </div>
         </div>
     )
