@@ -12,9 +12,4 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @PutMapping("/{id}/alterAccount")
-    public Optional<User> updateUser(@RequestBody ){
-        return user
-    }
 }
