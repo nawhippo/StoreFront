@@ -34,7 +34,7 @@ const searchTermMatches = (term, product) => {
         )
     }
    
-    const filteredProducts = products.filter(product=> searchTermMatches(searchFilter, product));
+    const filteredProducts = products.filter(product => searchTermMatches(searchFilter, product));
 
     
     return (
