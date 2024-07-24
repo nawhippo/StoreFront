@@ -2,13 +2,6 @@ import { Children, useState } from 'react';
 import React, { createContext, useContext, useState } from 'react'
 
 const userContext = createContext(null);
-//created at login
-const createUserContext = (username, jwt) => {
-    userContext = React.createContext(null)
-    setUsername(username)
-    setjwt(jwt);
-} 
-
 
 
 export const UserProvider =  ({ children }) => {
