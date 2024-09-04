@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SizeSlider from './SizeSlider';
+import { CardActionArea, CardMedia, Slider, Card } from "@mui/material";
 const ProductCard = ( {Product} ) => {
     const [productState, setProductState] = useState(Product);
     let imgsource;
@@ -11,18 +11,18 @@ const ProductCard = ( {Product} ) => {
     }
 
     return (
-          <div class="card">
-            <img class="card-img-top" src={productState} alt={productState.name}></img>
-            <div className="card-title">
-            {product.name}
-            </div>
-            <div className="card-body">
-              {product.description}
-            </div>
-            <p className="card-text">
-            {product.price}
-            </p>
-            <SizeSlider></SizeSlider>
-          </div>  
+      <Card>
+        <Card Header>{Product.name}</Card>
+        <CardActionArea>
+          {Product.image ? (
+            <CardMedia src=""/>
+          ) : (
+            null
+          )
+          }
+        <Card></Card>
+      </CardActionArea>
+      </Card>
     );
 }
+export default ProductCard;
