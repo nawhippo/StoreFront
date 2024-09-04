@@ -1,6 +1,8 @@
 package NateGroup.StoreFront.Orders;
 
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,17 +16,17 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public List<Order> getAllOrders() {
+    public ResponseEntity<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
-    public Optional<Order> getOrderById(@PathVariable long id) {
+    public ResponseEntity<Order> getOrderById(@PathVariable long id) {
         return orderService.getOrderById(id);
     }
 
-    @PostMapping
-    public Order createOrder(@RequestBody Order order) {
+    @PostMapping("/create")
+    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
     }
 
