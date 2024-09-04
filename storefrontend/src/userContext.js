@@ -1,26 +1,43 @@
-import { Children, useState } from 'react';
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
-const userContext = createContext(null);
+const UserContext = createContext();
 
-
-export const UserProvider =  ({ children }) => {
-    const [username, setUsername] = useState('');
-    const [jwt, setJwt] = useState('');
-
-
-    const setUserContext = (username, jwt) => {
-    setUsername(username);
-    setJwt(jwt);
+export function useUserContext() {
+  return useContext(UserContext);
 }
 
-    return (
-        <userContext.provider userContext={{username, jwt, setUserContext}}>
-            {children}
-        </userContext.provider>
-    )
+export function UserProvider({ children }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const cookieUserData = Cookies.get('userData');
+    if (cookieUserData) {
+      setUser(JSON.parse(cookieUserData));
+    }
+  }, []);
+
+  const updateUser = (newUserData) => {
+    setUser(newUserData);
+    Cookies.set('userData', JSON.stringify(newUserData));
+  };
+
+  const updateBackgroundColor = (color) => {
+    const updatedUser = { ...user, backgroundColor: color };
+    updateUser(updatedUser);
+  };
+
+  const clearUserContext = () => {
+    setUser(null);
+    Cookies.remove('userData');
+    Cookies.set('sessionExpired', 'true');
+  };
+
+  return (
+    <UserContext.Provider value={{ user }}>
+      {children}
+    </UserContext.Provider>
+  );
 }
 
-export const useUserContext = () => {
-    return useContext(UserContext);
-};
+export { UserContext }
