@@ -1,6 +1,6 @@
-import react, {useEffect, useState} from "react";
-
-const productPage = () => {
+import { useState, useEffect} from 'react';
+import ProductCard from './ProductCard';
+const ProductPage = () => {
     const [products, setProducts] = useState([]);
     const [message, setMessage] = useState('');
     const [searchFilter, setSearchFilter] = useState('');
@@ -52,4 +52,5 @@ const searchTermMatches = (term, product) => {
             </div>
         </div>
     )
-}
+};
+export default ProductPage;
